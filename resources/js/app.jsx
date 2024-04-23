@@ -5,6 +5,8 @@ import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { Web3ModalProvider } from "@/Context/Web3ModalProvider.jsx";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Bloak';
 
@@ -17,6 +19,7 @@ createInertiaApp({
         root.render(
             <Web3ModalProvider>
                 <App {...props} />
+                <ToastContainer />
             </Web3ModalProvider>
         );
     },

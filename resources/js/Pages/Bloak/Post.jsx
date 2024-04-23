@@ -1,20 +1,33 @@
-import {Link, Head} from '@inertiajs/react';
+import {Link, Head, usePage} from '@inertiajs/react';
 import ProfileCard from "@/Components/UserPage/ProfileCard.jsx";
 import Card from "@/Components/UserPage/Card.jsx";
 
-export default function Index() {
+export default function Post({ auth, bloak, post }) {
 
     return (
         <>
-            <Head title="Page of a user"/>
+            <Head title={bloak.name}/>
             <header className="grid grid-cols-2 items-center gap-2 py-10 ">
                 <div className="flex justify-center">
-                    <img className="h-12 w-auto text-white lg:h-16" src="http://localhost/images/bloak-logo-red.png"/>
+                    <img className="h-12 w-auto text-white lg:h-16" src="http://localhost/images/bloak-logo.png"/>
                 </div>
                 <nav className="flex flex-1 justify-center">
-                <w3m-button/>
+                    <w3m-button/>
                 </nav>
             </header>
+            {auth.user ? (
+                <div>
+                    {/* Elements to show when user is logged in */}
+                    <h1>Welcome, User!</h1>
+                    {/* Other logged-in content */}
+                </div>
+            ) : (
+                <div>
+                    {/* Elements to show when user is not logged in */}
+                    <h1>Please login to continue {bloak.name}</h1>
+                    {/* Login form or other content */}
+                </div>
+            )}
             <ProfileCard/>
 
             <form className="max-w-2xl mt-4 mx-auto">
@@ -37,7 +50,7 @@ export default function Index() {
                 </div>
             </form>
 
-            <Card/>
+                <Card bloak={bloak} key={post.id} title={post.title} timestamp={post.created_at} content={post.content} slug={post.slug} />
         </>
     );
 }

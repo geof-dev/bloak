@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\SIWEController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -33,6 +34,10 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
+
+    Route::get('siwe-nonce', [SIWEController::class, 'getNonce'])->name('siwe.nonce');
+    Route::post('siwe-verify', [SIWEController::class, 'verifySignature'])->name('siwe.verify');
+
 });
 
 Route::middleware('auth')->group(function () {
@@ -56,4 +61,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+    Route::post('siwe-signout', [SIWEController::class, 'signOut'])->name('siwe.signout');
 });
+Route::post('siwe-session', [SIWEController::class, 'getSession'])->name('siwe.session');

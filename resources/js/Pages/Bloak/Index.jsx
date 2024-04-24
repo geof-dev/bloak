@@ -16,20 +16,10 @@ export default function Index({ auth, bloak, posts }) {
                 <w3m-button/>
                 </nav>
             </header>
-            {auth.user ? (
-                <div>
-                    {/* Elements to show when user is logged in */}
-                    <h1>Welcome, User!</h1>
-                    {/* Other logged-in content */}
-                </div>
-            ) : (
-                <div>
-                    {/* Elements to show when user is not logged in */}
-                    <h1>Please login to continue {bloak.name}</h1>
-                    {/* Login form or other content */}
-                </div>
-            )}
-            <ProfileCard/>
+
+            { auth.user ? ( <></> ) : ( <></> ) }
+
+            <ProfileCard bloak={bloak} />
 
             <form className="max-w-2xl mt-4 mx-auto">
                 <label htmlFor="default-search"
@@ -44,7 +34,7 @@ export default function Index({ auth, bloak, posts }) {
                     </div>
                     <input type="search" id="default-search"
                            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
-                           placeholder="Search Mockups, Logos..." required/>
+                           placeholder="Search content..." required/>
                     <button type="submit"
                             className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ">Search
                     </button>
@@ -52,7 +42,7 @@ export default function Index({ auth, bloak, posts }) {
             </form>
 
             {posts.map(post => (
-                <Card bloak={bloak} key={post.id} title={post.title} timestamp={post.created_at} content={post.content} slug={post.slug} />
+                <Card bloak={bloak} key={post.id} post={post} />
             ))}
         </>
     );

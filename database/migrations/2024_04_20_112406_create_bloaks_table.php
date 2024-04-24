@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('url');
+            $table->string('headline')->nullable();
+            $table->json('links')->nullable();
             $table->timestamps();
             $table->foreignId('user_id')
                   ->constrained()

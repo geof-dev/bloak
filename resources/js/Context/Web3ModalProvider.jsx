@@ -146,7 +146,8 @@ createWeb3Modal({
     chains: [mainnet],
     projectId,
     enableAnalytics: true,
-    siweConfig
+    siweConfig,
+    themeMode: 'light'
 })
 
 export function Web3ModalProvider({ children }) {

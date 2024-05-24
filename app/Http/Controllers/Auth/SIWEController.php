@@ -101,7 +101,7 @@ class SIWEController extends Controller
         if(!$signatureIsValid = $this->checkSignature($request->input('message'), $request->input('signature'), $ethereumAddress)) return response()->json(['isValid' => $signatureIsValid]);;
 
 
-        $user = User::query()->where('eth_address', '0x7bDf331AdC423e2C0948406a7C9c37356fC65C4d')->first();
+        $user = User::query()->where('eth_address', $ethereumAddress)->first();
         if (!$user) {
             // If the user does not exist, create a new account
             $user = new User();

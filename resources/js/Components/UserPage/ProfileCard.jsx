@@ -3,8 +3,8 @@ import getPlatform from '../../Helpers/socialMediaHelper';
 import {FaBagShopping} from "react-icons/fa6";
 import {FaHubspot, FaNewspaper} from "react-icons/fa";
 
-export default function ProfileCard({bloak}) {
-    const socialLinks = bloak.links.split(",").map(link => link.trim());
+export default function ProfileCard({bloak, subCount}) {
+    const socialLinks = bloak.links ? bloak.links.split(",").map(link => link.trim()) : [];
 
     return (
         <div className="max-w-2xl mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto bg-white shadow-xl rounded-lg text-gray-900">
@@ -24,7 +24,7 @@ export default function ProfileCard({bloak}) {
         <ul className="py-4 text-gray-700 font-bold flex items-center justify-around w-1/3">
             <li className="flex flex-col items-center justify-around">
                 <FaNewspaper />
-                <div>20</div>
+                <div>{subCount}</div>
             </li>
             <li className="flex flex-col items-center justify-between">
                 <FaHubspot />

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BloakController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\BloakMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +17,12 @@ Route::get('/', function () {
     ]);
 })->name('homepage');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/posts', [DashboardController::class, 'posts'])->name('dashboard.posts');
+    Route::post('/newPost', [DashboardController::class, 'newPost'])->name('dashboard.newPost');
+    Route::get('/post/{slug}', [DashboardController::class, 'post'])->name('dashboard.post');
+});
 
 Route::get('/create/{url?}', [BloakController::class, 'create'])->name('bloak.create');
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->string('thumbnail')->nullable();
             $table->enum('type', ['public', 'private'])->default('public');
             $table->boolean('active')->default(false);

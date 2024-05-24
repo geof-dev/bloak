@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
@@ -50,5 +51,10 @@ class User extends Authenticatable
     public function bloak(): HasOne
     {
         return $this->hasOne(Bloak::class);
+    }
+
+    public function subBloaks(): BelongsToMany
+    {
+        return $this->belongsToMany(Bloak::class, 'subs')->using(Sub::class);
     }
 }

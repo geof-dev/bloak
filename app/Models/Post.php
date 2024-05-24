@@ -10,6 +10,16 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'thumbnail',
+        'type',
+        'active',
+        'bloak_id'
+    ];
+
     public function bloak(): BelongsTo
     {
         return $this->belongsTo(Bloak::class);

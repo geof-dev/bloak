@@ -8,6 +8,7 @@ use Inertia\Response;
 use App\Models\Bloak;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Redirect;
 
 
 class BloakController extends Controller
@@ -16,9 +17,11 @@ class BloakController extends Controller
     {
         $bloak = $request->input('bloak');
         $posts = $bloak->posts()->latest()->take(5)->get();
+        $subCount = $bloak->subs()->count();
         return Inertia::render('Bloak/Index',[
             'bloak' => $bloak,
             'posts' => $posts,
+            'subCount' => $subCount
         ]);
     }
 
@@ -43,7 +46,7 @@ class BloakController extends Controller
             'url' => $validatedData['url'],
             'name' => $validatedData['name'],
         ]);
-        return to_route('homepage');
+        return to_route('dashboard');
     }
 
     public function post(Request $request): Response

@@ -9,7 +9,7 @@ export default function Card({ bloak, post }) {
                 <FaLock/>
             </div>
             <p className="font-light text-gray-400 mb-2">2 hours ago</p>
-            <p className="font-normal text-gray-700 ">{post.content.substring(0, 175) + "..."}</p>
+            <p className="font-normal text-gray-700 ">{post.content ? post.content.substring(0, 175) + "..." : ''}</p>
         </a>
     );
 }

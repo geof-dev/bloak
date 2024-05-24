@@ -35,7 +35,7 @@ export default function Create({ auth, bloakFromURL }) {
                 class="relative flex max-w-screen-xl flex-col overflow-hidden px-4 py-4 text-gray-950 md:mx-auto md:flex-row md:items-center">
                 <a href="#" className="flex cursor-pointer items-center whitespace-nowrap text-2xl font-black">
                       <span class="mr-2 text-4xl text-amber-900">
-                      <img src="http://localhost/images/bloak-logo.png"
+                      <img src="/images/bloak-logo.png"
                            alt="Bloak Logo" aria-hidden="true" role="img"
                            style={{maxHeight: '50px'}}
                       />

@@ -3,14 +3,14 @@ import ProfileCard from "@/Components/UserPage/ProfileCard.jsx";
 import Card from "@/Components/UserPage/Card.jsx";
 import {useState} from "react";
 
-export default function Index({ auth, bloak, posts }) {
+export default function Index({ auth, bloak, posts, subCount }) {
 
     return (
         <>
             <Head title={bloak.name}/>
             <header className="grid grid-cols-2 items-center gap-2 py-10 ">
                 <div className="flex justify-center">
-                    <img className="h-12 w-auto text-white lg:h-16" src="http://localhost/images/bloak-logo.png"/>
+                    <img className="h-12 w-auto text-white lg:h-16" src="/images/bloak-logo.png"/>
                 </div>
                 <nav className="flex flex-1 justify-center">
                 <w3m-button/>
@@ -19,7 +19,7 @@ export default function Index({ auth, bloak, posts }) {
 
             { auth.user ? ( <></> ) : ( <></> ) }
 
-            <ProfileCard bloak={bloak} />
+            <ProfileCard bloak={bloak} subCount={subCount} />
 
             <form className="max-w-2xl mt-4 mx-auto">
                 <label htmlFor="default-search"

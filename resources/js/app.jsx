@@ -7,6 +7,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { Web3ModalProvider } from "@/Context/Web3ModalProvider.jsx";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Flowbite } from "flowbite-react";
 
 const appName = import.meta.env.VITE_APP_NAME || 'Bloak';
 
@@ -18,8 +19,10 @@ createInertiaApp({
 
         root.render(
             <Web3ModalProvider>
-                <App {...props} />
-                <ToastContainer />
+                <Flowbite>
+                    <App {...props} />
+                    <ToastContainer />
+                </Flowbite>
             </Web3ModalProvider>
         );
     },

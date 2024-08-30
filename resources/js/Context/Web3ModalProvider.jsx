@@ -1,7 +1,6 @@
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
-import { generateNonce, SiweMessage } from 'siwe'
-import { createSIWEConfig } from '@web3modal/siwe'
-import { router } from '@inertiajs/react';
+import {createWeb3Modal, defaultConfig} from '@web3modal/ethers/react'
+import {createSIWEConfig, formatMessage} from '@web3modal/siwe'
+import {router} from '@inertiajs/react';
 
 // 1. Get projectId
 const projectId = '1b706ddc929e1e5cae2f575aea0f964d'
@@ -38,8 +37,8 @@ const ethersConfig = defaultConfig({
 
 // SIWE
 
-function createMessage({ nonce, address, chainId }){
-    const message = new SiweMessage({
+function createMessage({ address, ...args }){
+    /*const message = new SiweMessage({
         version: '1',
         domain: window.location.host,
         uri: window.location.origin,
@@ -47,9 +46,21 @@ function createMessage({ nonce, address, chainId }){
         chainId,
         nonce,
         statement: 'Sign in With Ethereum on Bloak.io'
-    })
+    })*/
+    console.log('createMessage args: ',args)
+    console.log('createMessage address: ',address)
+    return formatMessage(args, address)
+}
 
-    return message.prepareMessage()
+function getMessageParams () {
+    console.log('getMessageParams')
+    return {
+        version: '1',
+        domain: window.location.host,
+        uri: window.location.origin,
+        chains: [1],
+        statement: 'Sign in With Ethereum on Bloak.io'
+    }
 }
 
 async function getBackendSession() {
@@ -88,10 +99,9 @@ async function getSession(){
 
 
 async function verifyMessage({ message, signature }){
+    console.log('verifyMessage')
     try {
-        const isValid = await validateMessage({ message, signature })
-
-        return isValid
+        return await validateMessage({message, signature})
     } catch (error) {
         return false
     }
@@ -100,6 +110,7 @@ async function verifyMessage({ message, signature }){
 async function getNonce(){
     try {
         const response = await axios.get(route('siwe.nonce'));
+        console.log('get nonce',response.data.nonce)
         return response.data.nonce;
     } catch (error) {
         return false;
@@ -119,6 +130,7 @@ async function signOut(){
 
 
 const siweConfig = createSIWEConfig({
+    getMessageParams,
     createMessage,
     getNonce,
     getSession,
